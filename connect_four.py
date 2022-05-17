@@ -1,9 +1,9 @@
 connect_four = []
 end = 0
-for row in range(6):
+for row in range(6):  # create board as lists inside the connect_four list
   connect_four.append(["|___|"] * 7)
 
-def drop_piece(column, piece):
+def drop_piece(column, piece):  # drops piece in first available row in column selected
   if piece.lower() == "x" or piece.lower() == "o":
     if column in range(1, 8):
       if (connect_four[0][column - 1] == ("|___|")):
@@ -32,7 +32,7 @@ def game_over(pieces):
           connect_four[0][2] == ("|_" + pieces + "_|")) and (connect_four[0][3] == ("|_" + pieces + "_|")) and (
           connect_four[0][4] == ("|_" + pieces + "_|")) and (connect_four[0][5] == ("|_" + pieces + "_|")) and (
           connect_four[0][6] == ("|_" + pieces + "_|"))):
-    end = 2
+    end = 2  # entire board is full: game ends in tie
   else:
     for y, row in enumerate(connect_four):
       for x, item in enumerate(row):
@@ -43,33 +43,33 @@ def game_over(pieces):
                 if connect_four[y][x-2] == f"|_{pieces}_|":
                   if (x-3) <= 6 and (x-3) >= 0:
                     if connect_four[y][x-3] == f"|_{pieces}_|":
-                      end = 1
+                      end = 1  # 4 in a row vertically: game ends
           if (y+1) <= 5 and (y+1) >= 0:
             if connect_four[y+1][x] == f"|_{pieces}_|":
               if (y+2) <= 5 and (y+2) >= 0:
                 if connect_four[y+2][x] == f"|_{pieces}_|":
                   if (y+3) <= 5 and (y+3) >= 0:
                     if connect_four[y+3][x] == f"|_{pieces}_|":
-                      end = 1
+                      end = 1  # 4 in a row horizontally: game ends
           if (y+1) <= 5 and (y+1) >= 0 and (x-1) <= 6 and (x-1) >= 0:
             if connect_four[y+1][x-1] == f"|_{pieces}_|":
               if (y+2) <= 5 and (y+2) >= 0 and (x-2) <= 6 and (x-2) >= 0:
                 if connect_four[y+2][x-2] == f"|_{pieces}_|":
                   if (y+3) <= 5 and (y+3) >= 0 and (x-3) <= 6 and (x-3) >= 0:
                     if connect_four[y+3][x-3] == f"|_{pieces}_|":
-                      end = 1
+                      end = 1  # 4 in a row diagonally upward: game ends
+          if (y+1) <= 5 and (y+1) >= 0 and (x+1) <= 6 and (x+1) >= 0:
+            if connect_four[y+1][x+1] == f"|_{pieces}_|":
+              if (y+2) <= 5 and (y+2) >= 0 and (x+2) <= 6 and (x+2) >= 0:
+                if connect_four[y+2][x+2] == f"|_{pieces}_|":
+                  if (y+3) <= 5 and (y+3) >= 0 and (x+3) <= 6 and (x+3) >= 0:
+                    if connect_four[y+3][x+3] == f"|_{pieces}_|":
+                      end = 1  # 4 in a row diagonally downward: game ends
 
 
 
 def play_game():
   global x_col, o_col
-  print("""
-   ____                            _     _____                
-  / ___|___  _ __  _ __   ___  ___| |_  |  ___|__  _   _ _ __ 
- | |   / _ \| '_ \| '_ \ / _ \/ __| __| | |_ / _ \| | | | '__|
- | |__| (_) | | | | | | |  __/ (__| |_  |  _| (_) | |_| | |   
-  \____\___/|_| |_|_| |_|\___|\___|\__| |_|  \___/ \__,_|_|   
-                                                              """)
   print_board(connect_four)
   print("  1    2    3    4    5    6    7")
   columns = ["1", "2", "3", "4", "5", "6", "7"]
